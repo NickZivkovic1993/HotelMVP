@@ -7,4 +7,7 @@
   WPC desktop app
 
 #DB Sql server
-#DB number 2 SQLite
+
+
+
+#DB number 2 SQLite (yet to be implemented)

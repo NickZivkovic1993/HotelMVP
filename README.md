@@ -1,2 +1,10 @@
 # HotelMVP
-MVP with 2 UI (razor pages and wpf) and 2 available dbs (SQLite , SQL Server) + DI + Dapper
+#2 different UI layers and 2 different databases
+
+#UI number one
+  Razor Pages - 2 pages in MVP later to be expanded
+#Ui number two
+  WPC desktop app
+
+#DB Sql server
+#DB number 2 SQLite

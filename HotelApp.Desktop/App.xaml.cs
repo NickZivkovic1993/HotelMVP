@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using HotelAppLibrary.Data;
 using HotelAppLibrary.Databases;
-
+using HotelAppLibrary.DataBases;
 
 namespace HotelApp.Desktop
 {
@@ -29,6 +29,7 @@ namespace HotelApp.Desktop
             services.AddTransient<MainWindow>();
             services.AddTransient<CheckInForm>();
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
+            services.AddTransient<ISqliteDataAccess, SqliteDataAccess>();
             services.AddTransient<IDatabaseData , SqlData>();
 
             var builder = new ConfigurationBuilder()
@@ -38,6 +39,22 @@ namespace HotelApp.Desktop
             IConfiguration config = builder.Build();
 
             services.AddSingleton(config);
+
+            string dbChoice = config.GetValue<string>("DatabaseChoice").ToLower();
+
+            if (dbChoice == "sql")
+            {
+                services.AddTransient<IDatabaseData, SqlData>();
+            }
+            else if (dbChoice == "sqlite")
+            {
+                services.AddTransient<IDatabaseData, SqliteData>();
+            }
+            else
+            {
+                services.AddTransient<IDatabaseData, SqlData>();
+                //default , nek je sql
+            }
 
             serviceProvider = serviceProvider = services.BuildServiceProvider();
             var mainWindow = serviceProvider.GetService<MainWindow>();
